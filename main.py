@@ -17,7 +17,7 @@ def choisir_fichier():
                 # Mise à jour du champ texte avec le nom du fichier sélectionné
                 champ_fichier.config(state='normal')
                 champ_fichier.delete(0, tk.END)
-                champ_fichier.insert(0, fichier)
+                champ_fichier.insert(0, fichier.split("/")[-1])
                 champ_fichier.config(state='readonly')
 
                 # Activer le bouton pour recommencer le tirage

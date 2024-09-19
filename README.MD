@@ -2,6 +2,8 @@
 
 Ce script python permet de choisir aléatoirement un élément parmi une liste d'éléments, contenus dans un fichier texte.
 
+Ce projet adhére au [Changelog Convention](https://keepachangelog.com/en/1.0.0/) et au [Semantic Versioning](https://semver.org/).
+
 # Sommaire
 
 - [Installation](#installation)
@@ -48,7 +50,12 @@ pyinstaller --onefile --noconsole main.py --name Random_Selector_<Version_Label>
 
 # Changelog
 
-- **Version 0.1.0 - Capella**
+## **Version 0.1.1**
+
+### **Changed**
+  - Le script n'affiche plus le chemin du fichier sélectionné, mais uniquement son nom
+
+## **Version 0.1.0 - Capella**
   - Première version du script
   - Ajout de la fonctionnalité de tirage aléatoire
   - Ajout de la fonctionnalité de sélection de fichier
