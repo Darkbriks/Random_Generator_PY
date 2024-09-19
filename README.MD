@@ -53,4 +53,3 @@ pyinstaller --onefile --noconsole main.py --name Random_Selector_<Version_Label>
   - Ajout de la fonctionnalité de tirage aléatoire
   - Ajout de la fonctionnalité de sélection de fichier
   - Ajout de la fonctionnalité d'affichage du résultat
-```
