@@ -25,13 +25,13 @@ class reel:
         self.duration = 0
         self.time = 0
 
-    def draw(self, screen):
-        screen.fill((255, 255, 255))
+        self.font = pygame.font.SysFont('Arial', 20)
 
+    def draw(self, screen):
         for i in range(len(self.elements)):
             element = self.elements[i]
             y_offset = (i * self.case_height + self.current_offset) % (len(self.elements) * self.case_height) - len(self.elements) * self.case_height // 2
-            text = font.render(element, True, (0, 0, 0))
+            text = self.font.render(element, True, (0, 0, 0))
             y_pos = (self.y - text.get_height() // 2) + y_offset
 
             if y_pos <= self.y + self.height // 2 - self.case_height // 2 and y_pos + text.get_height() >= self.y - self.height // 2 + self.case_height // 2:
@@ -46,8 +46,6 @@ class reel:
         pygame.draw.circle(screen, (255, 0, 0), (self.x - self.width // 2, self.y), 2)
         pygame.draw.circle(screen, (255, 0, 0), (self.x + self.width // 2, self.y), 2)
 
-        pygame.display.flip()
-
     def start_spin(self):
         if self.rolling:
             return
@@ -57,7 +55,6 @@ class reel:
 
     def stop_spin(self):
         self.rolling = False
-        print("Result:", self.elements[(len(self.elements) - int(self.current_offset / self.case_height) + 5) % len(self.elements)])
 
     def update(self, dt):
         if self.rolling:
@@ -73,7 +70,7 @@ class reel:
 
 if __name__ == "__main__":
     pygame.init()
-    font = pygame.font.SysFont('Arial', 20)
+    #font = pygame.font.SysFont('Arial', 20)
     screen = pygame.display.set_mode((400, 400))
     pygame.display.set_caption("Test Reel")
 
@@ -89,6 +86,8 @@ if __name__ == "__main__":
         deltatime = current_time - last_time
         last_time = current_time
 
+        screen.fill((255, 255, 255))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -98,5 +97,6 @@ if __name__ == "__main__":
 
         r.update(deltatime)
         r.draw(screen)
+        pygame.display.flip()
 
     pygame.quit()

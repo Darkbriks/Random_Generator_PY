@@ -50,6 +50,13 @@ pyinstaller --onefile --noconsole main.py --name Random_Selector_<Version_Label>
 
 # Changelog
 
+## **Unreleased**
+
+### **Added**
+  - Classe reel pour gérer les rouleaux
+  - Classe window pour gérer la fenêtre principale
+  - Utilisation d'un fichier de configuration pour rendre la fenêtre plus modulaire
+
 ## **Version 0.1.1**
 
 ### **Changed**

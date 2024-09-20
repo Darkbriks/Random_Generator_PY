@@ -1,0 +1,16 @@
+# Répertoire courant
+#C:\Users\antoi\PycharmProjects\RandomSelection
+
+# Fichier de données
+names.txt
+
+# Titre de la fenêtre
+TIRAGE DU CONCOURS
+
+# Texte secondaire
+GAGNANTS
+
+# Categories
+LotPCI-Informatique
+LotMiaTerra
+LotissoireBrocante
