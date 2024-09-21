@@ -62,7 +62,8 @@ Pour ajouter une icône au fichier exécutable, ajoutez l'option `--icon=<Path_T
   - Utilisation d'un fichier de configuration pour rendre la fenêtre plus modulaire
 
 ### **Changed**
-    - Le main utilise désormais la classe window pour gérer la fenêtre principale
+  - Le main utilise désormais la classe window pour gérer la fenêtre principale
+  - L'interface a été améliorée pour ce raprocher de la version souhaitée
 
 ## **Version 0.1.1**
 
