@@ -5,24 +5,35 @@ from reel import reel
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+LIGHT_GRAY = (211, 211, 211)
+DARK_GRAY = (169, 169, 169)
 ORANGE = (255, 165, 0)
 
 
-class window:
+def get_next_line(f):
+    line = f.readline()
+    while line and (line[0] == '#' or line == '\n'):
+        if not line:
+            return None
+        line = f.readline()
+    return line
+
+
+class Window:
     def __init__(self, width, height, config):
         self.width = width
         self.height = height
         self.config = os.path.join(os.path.dirname(__file__), config)
 
         with open(self.config, 'r') as f:
-            self.data_file = self.get_next_line(f).strip()
-            self.title = self.get_next_line(f).strip()
-            self.second_title = self.get_next_line(f).strip()
+            self.data_file = get_next_line(f).strip()
+            self.title = get_next_line(f).strip()
+            self.second_title = get_next_line(f).strip()
             self.categories = []
-            category = self.get_next_line(f).strip()
+            category = get_next_line(f).strip()
             while category:
                 self.categories.append(category)
-                category = self.get_next_line(f).strip()
+                category = get_next_line(f).strip()
             f.close()
 
         self.data = []
@@ -33,12 +44,14 @@ class window:
 
         self.reels = []
         for i, category in enumerate(self.categories):
-            self.reels.append(reel(self.data, 300 + (300 * i), 500))
+            self.reels.append(reel(self.data, self.width // 2 + (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), 500))
 
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
-        self.titl_font = pygame.font.SysFont('Arial', 24)
-        self.font = pygame.font.SysFont('Arial', 20)
+        self.title_font = pygame.font.SysFont('Arial', 50)
+        self.title_font.set_bold(True)
+        self.title_font.set_underline(True)
+        self.font = pygame.font.SysFont('Arial', 28)
         self.small_font = pygame.font.SysFont('Arial', 16)
         self.running = True
 
@@ -65,13 +78,16 @@ class window:
 
     def draw(self):
         self.screen.fill((255, 255, 255))
-        self.draw_text(self.title, 0, 250, self.titl_font, ORANGE)
+        self.draw_text(self.title, 0, 250, self.title_font, ORANGE)
 
         #self.draw_button("Start", 0, 175, 75, 30, BLACK, WHITE, self.font, ORANGE, action=lambda: print("interact"))
-        self.draw_button("Start", 0, 175, 75, 30, BLACK, WHITE, self.font, ORANGE, action=self.start_spin)
+        self.draw_button("Start", 0, 150, 100, 30, WHITE, LIGHT_GRAY, self.font, BLACK, self.start_spin, True, 2, LIGHT_GRAY)
+
+        self.draw_text("-" * 150, 0, 100, self.font, BLACK)
+        self.draw_text(self.second_title, 0, 25, self.title_font, ORANGE)
 
         for i, category in enumerate(self.categories):
-            self.draw_text(category, 0 + (300 * (i - len(self.categories) // 2)), 0, self.font, BLACK)
+            self.draw_text(category, (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), -75, self.font, BLACK)
 
         for reel in self.reels:
             reel.update(self.deltatime)
@@ -80,11 +96,11 @@ class window:
         #pygame.draw.circle(self.screen, (255, 0, 0), (self.width // 2, self.height // 2), 2)
 
     def draw_text(self, text, x, y, font, color, x_align=0.5, y_align=0.5):
-        x = self.width // 2 - (self.font.size(text)[0] * x_align) + x
-        y = self.height // 2 - (self.font.size(text)[1] * y_align) - y
+        x = self.width // 2 - (font.size(text)[0] * x_align) + x
+        y = self.height // 2 - (font.size(text)[1] * y_align) - y
         self.screen.blit(font.render(text, True, color), (x, y))
 
-    def draw_button(self, text, x, y, width, height, color, hover_color, font, text_color, action=None):
+    def draw_button(self, text, x, y, width, height, color, hover_color, font, text_color, action=None, draw_border=False, border_width=1, border_color=BLACK):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         mouse_x = mouse[0] - self.width // 2 + width // 2
@@ -97,15 +113,10 @@ class window:
         else:
             pygame.draw.rect(self.screen, color, (x + self.width // 2 - width // 2, self.height // 2 - y - height // 2, width, height))
 
-        self.draw_text(text, x, y, font, text_color, 0.5, 0.5)
+        if draw_border:
+            pygame.draw.rect(self.screen, border_color, (x + self.width // 2 - width // 2 - border_width, self.height // 2 - y - height // 2 - border_width, width + 2 * border_width, height + 2 * border_width), border_width)
 
-    def get_next_line(self, f):
-        line = f.readline()
-        while line and (line[0] == '#' or line == '\n'):
-            if not line:
-                return None
-            line = f.readline()
-        return line
+        self.draw_text(text, x, y, font, text_color, 0.5, 0.5)
 
     def start_spin(self):
         for reel in self.reels:
@@ -113,4 +124,4 @@ class window:
 
 if __name__ == "__main__":
     pygame.init()
-    window(1280, 720, 'config.txt')
+    Window(1280, 720, 'config.txt')

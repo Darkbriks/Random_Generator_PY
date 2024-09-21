@@ -1,6 +1,3 @@
-# Répertoire courant
-#C:\Users\antoi\PycharmProjects\RandomSelection
-
 # Fichier de données
 names.txt
 
@@ -14,3 +11,4 @@ GAGNANTS
 LotPCI-Informatique
 LotMiaTerra
 LotissoireBrocante
+Test
