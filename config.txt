@@ -1,6 +1,9 @@
 # Fichier de données
 names.txt
 
+# Icône de la fenêtre
+assets/LogoRandomizer.png
+
 # Titre de la fenêtre
 TIRAGE DU CONCOURS
 
@@ -11,4 +14,4 @@ GAGNANTS
 LotPCI-Informatique
 LotMiaTerra
 LotissoireBrocante
-Test
+#Test

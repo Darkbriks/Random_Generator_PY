@@ -7,7 +7,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 LIGHT_GRAY = (211, 211, 211)
 DARK_GRAY = (169, 169, 169)
-ORANGE = (255, 165, 0)
+ORANGE = (255, 130, 0)
 
 
 def get_next_line(f):
@@ -23,10 +23,10 @@ class Window:
     def __init__(self, width, height, config):
         self.width = width
         self.height = height
-        self.config = os.path.join(os.path.dirname(__file__), config)
 
-        with open(self.config, 'r') as f:
+        with open(config, 'r') as f:
             self.data_file = get_next_line(f).strip()
+            self.icon = get_next_line(f).strip()
             self.title = get_next_line(f).strip()
             self.second_title = get_next_line(f).strip()
             self.categories = []
@@ -47,9 +47,9 @@ class Window:
             self.reels.append(reel(self.data, self.width // 2 + (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), 500))
 
         self.screen = pygame.display.set_mode((self.width, self.height))
+        pygame.display.set_icon(pygame.image.load(self.icon))
         pygame.display.set_caption(self.title)
-        self.title_font = pygame.font.SysFont('Arial', 50)
-        self.title_font.set_bold(True)
+        self.title_font = pygame.font.Font("assets/fonts/TT Mussels Trial DemiBold.otf", 48)
         self.title_font.set_underline(True)
         self.font = pygame.font.SysFont('Arial', 28)
         self.small_font = pygame.font.SysFont('Arial', 16)
@@ -121,7 +121,3 @@ class Window:
     def start_spin(self):
         for reel in self.reels:
             reel.start_spin()
-
-if __name__ == "__main__":
-    pygame.init()
-    Window(1280, 720, 'config.txt')

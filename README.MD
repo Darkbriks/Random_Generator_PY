@@ -48,14 +48,21 @@ Ensuite, pour compiler le script, exécutez la commande suivante:
 pyinstaller --onefile --noconsole main.py --name Random_Selector_<Version_Label>_<Version_Number>
 ```
 
+Pour ajouter une icône au fichier exécutable, ajoutez l'option `--icon=<Path_To_Icon>` à la commande précédente.
+
 # Changelog
 
 ## **Unreleased**
+
+## **Version 0.2.0 - Altair**
 
 ### **Added**
   - Classe reel pour gérer les rouleaux
   - Classe window pour gérer la fenêtre principale
   - Utilisation d'un fichier de configuration pour rendre la fenêtre plus modulaire
+
+### **Changed**
+    - Le main utilise désormais la classe window pour gérer la fenêtre principale
 
 ## **Version 0.1.1**
 
