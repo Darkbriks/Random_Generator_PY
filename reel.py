@@ -7,7 +7,7 @@ def cos_intrp(a, b, t):
     return a * (1 - t2) + b * t2
 
 class reel:
-    def __init__(self, elements, x, y, start_speed=-1, end_speed=0, min_duration=10000, max_duration=15000, width=200, height=50, case_height=20, draw_border=True, border_width=10, current_offset=100):
+    def __init__(self, elements, x, y, start_speed=-1, end_speed=0, min_duration=10000, max_duration=15000, width=200, height=50, case_height=20, draw_border=True, border_width=2, current_offset=100):
         self.elements = elements
         self.x = x
         self.y = y
@@ -40,11 +40,11 @@ class reel:
         if self.draw_border:
             pygame.draw.rect(screen, (0, 0, 0), (self.x - self.width // 2 - self.border_width, self.y - self.height // 2 - self.border_width, self.width + 2 * self.border_width, self.height + 2 * self.border_width), self.border_width)
 
-        pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y), 2)
-        pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y + self.height // 2), 2)
-        pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y - self.height // 2), 2)
-        pygame.draw.circle(screen, (255, 0, 0), (self.x - self.width // 2, self.y), 2)
-        pygame.draw.circle(screen, (255, 0, 0), (self.x + self.width // 2, self.y), 2)
+        #pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y), 2)
+        #pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y + self.height // 2), 2)
+        #pygame.draw.circle(screen, (255, 0, 0), (self.x, self.y - self.height // 2), 2)
+        #pygame.draw.circle(screen, (255, 0, 0), (self.x - self.width // 2, self.y), 2)
+        #pygame.draw.circle(screen, (255, 0, 0), (self.x + self.width // 2, self.y), 2)
 
     def start_spin(self):
         if self.rolling:
