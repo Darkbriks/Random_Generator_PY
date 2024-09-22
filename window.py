@@ -27,8 +27,21 @@ class Window:
         with open(config, 'r') as f:
             self.data_file = get_next_line(f).strip()
             self.icon = get_next_line(f).strip()
+
             self.title = get_next_line(f).strip()
+            self.title_image = pygame.image.load(self.title.split("/!/")[0]) if os.path.splitext(self.title.split("/!/")[0])[1] in ['.jpg', '.png', '.jpeg'] else None
+            if self.title_image:
+                self.title_image_width = int(self.title.split("/!/")[1])
+                self.title_image_height = int(self.title.split("/!/")[2])
+                self.title_image = pygame.transform.scale(self.title_image, (self.title_image_width, self.title_image_height))
+
             self.second_title = get_next_line(f).strip()
+            self.second_title_image = pygame.image.load(self.second_title.split("/!/")[0]) if os.path.splitext(self.second_title.split("/!/")[0])[1] in ['.jpg', '.png', '.jpeg'] else None
+            if self.second_title_image:
+                self.second_title_image_width = int(self.second_title.split("/!/")[1])
+                self.second_title_image_height = int(self.second_title.split("/!/")[2])
+                self.second_title_image = pygame.transform.scale(self.second_title_image, (self.second_title_image_width, self.second_title_image_height))
+
             self.categories = []
             category = get_next_line(f).strip()
             while category:
@@ -78,13 +91,21 @@ class Window:
 
     def draw(self):
         self.screen.fill((255, 255, 255))
-        self.draw_text(self.title, 0, 250, self.title_font, ORANGE)
+
+        if not self.title_image:
+            self.draw_text(self.title, 0, 250, self.title_font, ORANGE)
+        else:
+            self.draw_image(self.title_image, 0, 250, self.title_image_width, self.title_image_height)
 
         #self.draw_button("Start", 0, 175, 75, 30, BLACK, WHITE, self.font, ORANGE, action=lambda: print("interact"))
         self.draw_button("Start", 0, 150, 100, 30, WHITE, LIGHT_GRAY, self.font, BLACK, self.start_spin, True, 2, LIGHT_GRAY)
 
         self.draw_text("-" * 150, 0, 100, self.font, BLACK)
-        self.draw_text(self.second_title, 0, 25, self.title_font, ORANGE)
+
+        if not self.second_title_image:
+            self.draw_text(self.second_title, 0, 25, self.title_font, ORANGE)
+        else:
+            self.draw_image(self.second_title_image, 0, 25, self.second_title_image_width, self.second_title_image_height)
 
         for i, category in enumerate(self.categories):
             self.draw_text(category, (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), -75, self.font, BLACK)
@@ -117,6 +138,9 @@ class Window:
             pygame.draw.rect(self.screen, border_color, (x + self.width // 2 - width // 2 - border_width, self.height // 2 - y - height // 2 - border_width, width + 2 * border_width, height + 2 * border_width), border_width)
 
         self.draw_text(text, x, y, font, text_color, 0.5, 0.5)
+
+    def draw_image(self, image, x, y, width, height):
+        self.screen.blit(image, (self.width // 2 - width // 2 + x, self.height // 2 - height // 2 - y))
 
     def start_spin(self):
         for reel in self.reels:

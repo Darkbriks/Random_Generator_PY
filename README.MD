@@ -54,6 +54,11 @@ Pour ajouter une icône au fichier exécutable, ajoutez l'option `--icon=<Path_T
 
 ## **Unreleased**
 
+## **Version 0.2.1**
+
+### **Added**
+  - Ajout de la gestion des images pour le titre et le sous-titre
+
 ## **Version 0.2.0 - Altair**
 
 ### **Added**
