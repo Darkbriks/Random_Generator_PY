@@ -61,7 +61,7 @@ class Window:
 
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_icon(pygame.image.load(self.icon))
-        pygame.display.set_caption(self.title)
+        pygame.display.set_caption("Randomizer")
         self.title_font = pygame.font.Font("assets/fonts/TT Mussels Trial DemiBold.otf", 48)
         self.title_font.set_underline(True)
         self.font = pygame.font.SysFont('Arial', 28)
