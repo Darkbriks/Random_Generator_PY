@@ -12,6 +12,9 @@ assets/img/TirageDuConcours.png/!/620/!/94
 # GAGNANTS
 assets/img/GagnantsConcours.png/!/314/!/94
 
+# Arriére-plan des catégories
+assets/img/VisuelTirageConcours.png/!/220/!/154
+
 # Categories
 LotPCI-Informatique
 LotMiaTerra

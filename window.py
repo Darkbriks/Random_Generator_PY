@@ -42,6 +42,13 @@ class Window:
                 self.second_title_image_height = int(self.second_title.split("/!/")[2])
                 self.second_title_image = pygame.transform.scale(self.second_title_image, (self.second_title_image_width, self.second_title_image_height))
 
+            self.categories_background = get_next_line(f).strip()
+            self.categories_background_image = pygame.image.load(self.categories_background.split("/!/")[0]) if os.path.splitext(self.categories_background.split("/!/")[0])[1] in ['.jpg', '.png', '.jpeg'] else None
+            if self.categories_background_image:
+                self.categories_background_image_width = int(self.categories_background.split("/!/")[1])
+                self.categories_background_image_height = int(self.categories_background.split("/!/")[2])
+                self.categories_background_image = pygame.transform.scale(self.categories_background_image, (self.categories_background_image_width, self.categories_background_image_height))
+
             self.categories = []
             category = get_next_line(f).strip()
             while category:
@@ -57,7 +64,7 @@ class Window:
 
         self.reels = []
         for i, category in enumerate(self.categories):
-            self.reels.append(reel(self.data, self.width // 2 + (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), 500))
+            self.reels.append(reel(self.data, self.width // 2 + (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), 550, width=220, height=70, case_height=30, draw_border=False))
 
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_icon(pygame.image.load(self.icon))
@@ -97,9 +104,7 @@ class Window:
         else:
             self.draw_image(self.title_image, 0, 250, self.title_image_width, self.title_image_height)
 
-        #self.draw_button("Start", 0, 175, 75, 30, BLACK, WHITE, self.font, ORANGE, action=lambda: print("interact"))
         self.draw_button("Start", 0, 150, 100, 30, WHITE, LIGHT_GRAY, self.font, BLACK, self.start_spin, True, 2, LIGHT_GRAY)
-
         self.draw_text("-" * 150, 0, 100, self.font, BLACK)
 
         if not self.second_title_image:
@@ -108,7 +113,8 @@ class Window:
             self.draw_image(self.second_title_image, 0, 25, self.second_title_image_width, self.second_title_image_height)
 
         for i, category in enumerate(self.categories):
-            self.draw_text(category, (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), -75, self.font, BLACK)
+            self.draw_image(self.categories_background_image, 300 * (i - len(self.categories) // 2) + (150 if len(self.categories) % 2 == 0 else 0), -150, self.categories_background_image_width, self.categories_background_image_height)
+            self.draw_text(category, (300 * (i - len(self.categories) // 2)) + (150 if len(self.categories) % 2 == 0 else 0), -100, self.font, BLACK)
 
         for reel in self.reels:
             reel.update(self.deltatime)

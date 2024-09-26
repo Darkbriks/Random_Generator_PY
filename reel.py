@@ -7,7 +7,7 @@ def cos_intrp(a, b, t):
     return a * (1 - t2) + b * t2
 
 class reel:
-    def __init__(self, elements, x, y, start_speed=-1, end_speed=0, min_duration=10000, max_duration=15000, width=200, height=50, case_height=20, draw_border=True, border_width=2, current_offset=100):
+    def __init__(self, elements, x, y, start_speed=-1, end_speed=0, min_duration=10000, max_duration=15000, width=200, height=50, case_height=20, draw_border=True, border_width=2, current_offset=0):
         self.elements = elements
         self.x = x
         self.y = y
