@@ -97,7 +97,7 @@ class Window:
         pygame.quit()
 
     def draw(self):
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((217, 217, 217))
 
         if not self.title_image:
             self.draw_text(self.title, 0, 250, self.title_font, ORANGE)
